@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style2.css" />
     <title>LOLApp</title>
     <link rel="icon" href="Img/iconoLoL.png">
   </head>
@@ -89,8 +88,8 @@
       </div>
     </div>
     <div id="root" class="hide">
-      <div id="filters" class="container row center-align">
-        <form action="#" id="champion-filters">
+      <div id="filters" class="row center-align">
+        <form action="#" id="champion-filters" class="col s12">
             <p>
               <label>
                 <input id="assassin" type="checkbox" value="Assassin" class="filter"/>
@@ -128,7 +127,7 @@
           </form>  
           <div id="order-and-search" class="container row valign-wrapper">
             <div class="input-field col m3" id="sort-options">
-              <select id="name">
+              <select id="sort">
                 <option value="" disabled>Nombre</option>
                 <option value="az" selected>A-Z</option>
                 <option value="za">Z-A</option>
@@ -145,7 +144,7 @@
           </div>  
       </div>
       <div id="general-champ-container">
-        <div id="champ-container" class="container row center-align">       
+        <div id="champ-container" class="container row">       
         </div>
         <div id="champ-container-mobile" class="container row">
         </div>
@@ -155,14 +154,15 @@
     </div>
 
     <!-- <script src="./data/injuries/injuries.js"></script> -->
-    <script src="./data/pokemon/pokemon.js"></script>
+    <!-- <script src="./data/pokemon/pokemon.js"></script> -->
     <!-- <script src="./data/steam/steam.js"></script> -->
     <!-- <script src="./data/worldbank/worldbank.js"></script> -->
     <!-- <script src="./data/lol/lol.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
     <script src="https://unpkg.com/image-map/dist/image-map.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="data.js"></script>
-    <script src="main.js"></script>
+    <script src="main2.js"></script>
 
   </body>
 </html>

@@ -1,0 +1,406 @@
+@font-face {
+    font-family: "Beaufort";
+    src: url("fonts/Beaufort-Regular.woff") format('woff');
+}
+
+@font-face {
+    font-family: "Beaufort";
+    src: url("fonts/Beaudort-Bold.woff") format('woff');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Beaufort";
+    src: url("fonts/Beaufort-Italic.woff") format('woff');
+    font-style: italic;
+}
+
+body {
+    background-color: #000000;
+    font-family: "Beaufort";
+    color: #F1E6D0;
+}
+
+
+#about-lolapp, #champions, #flame {
+    /* font-family: "Beaufort";
+    color: #F1E6D0;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font-size: 1.5vw;
+    top: -8.7vw;
+    border: 0;
+    margin-right: 10vw;
+    margin-left: 10vw;
+    padding: 0;
+    position: relative;
+    cursor: pointer; */
+    z-index: 2;
+}
+
+#champions:hover, #flame:hover, #about-lolapp:hover {
+    /* color: #69502B; */
+    color: #937350;
+}
+
+#search-input {
+    box-sizing: border-box;
+    background: #FAFAFA;
+    border-radius: 20px;
+    padding: 10px;
+    border: 2px solid #F1E6D0;
+}
+
+#search-input::placeholder {
+    color: #a0a0a0;
+    font-family: FontAwesome, Arial;
+}
+
+div.card.col.s3 {
+    text-align: left;
+    min-height: 216px;
+}
+
+
+.card {
+    margin: 1vw 3.2vw;
+    border: 1px solid #937341;
+    border-radius: 10px;
+    background: #0A0A0C;
+    color: #F1E6D0;
+    margin-right: 4.15%;
+    margin-left: 4.15%;
+}
+
+.row .col.s3 {
+    margin-left: 4.15%;
+}
+
+.card .card-reveal {
+    background: #0A0A0C;
+}
+.img-champion {
+    padding: 10px;
+}
+
+.champ-title {
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+.card .card-content .card-title {
+    margin-bottom: 0;
+}
+#filters {
+    color: #F1E6D0;
+    font-size: 2vw;
+    position: absolute;
+    top: 16vw;
+    width: 99%;
+    margin: 5px;
+    text-align: center;
+}
+
+.filter-box {
+    color: #F1E6D0;
+    border: 1px solid #F1E6D0;
+    border-radius: 10px;
+    font-size: 2vw;
+
+}
+
+label {
+    padding-right: 2vw;
+}
+
+#champ-container-mobile {
+    display: none;
+}
+
+.mobile-version {
+    padding: 3px;
+}
+
+div.card-content.mobile-version {
+    padding: 0;
+    font-size: 1vw;
+}
+
+div.card.mobile-version {
+    /* min-height: 80px; */
+    min-width: 50px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+div#filters.container.row.center-align {
+    margin: 0;
+}
+
+
+#name-order, #release-order {
+    /* float: right; */
+    color: #c9aa71;
+    background-color: #0A0A0C;
+    border: 1px solid #F1E6D0;
+}
+
+#sort-options {
+    margin-left: 23px;
+
+}
+
+#search {
+    margin-left: auto;
+}
+
+div#champ-container.container.row {
+    position: relative;
+    top: 13vw;
+}
+
+input.select-dropdown.dropdown-trigger {
+    color: #F1E6D0;
+    font-size: 1.5vw;
+}
+
+.select-wrapper input.select-dropdown:focus {
+    border-bottom: 1px solid #F1E6D0;
+}
+
+/* #champions {
+    position: relative;
+    float: right;
+    right: 51%;
+}
+
+#flame {
+    position: relative;
+    float: left;
+    left: 53%;
+} */
+
+.dropdown-content li > a, .dropdown-content li > span {
+    color: #F1E6D0;
+    background-color: #000000;
+}
+
+#individual-champs {
+    position: relative;
+    top: -5vw;
+    display: none;
+    z-index: 1;
+}
+
+#champ-name-title {
+    color: #F1E6D0;
+    z-index: 1;
+}
+
+#champ-name {
+    font-size: 5vw;
+    margin-bottom: 0;
+}
+
+#champ-title {
+    margin-top: 0;
+    font-style: italic;
+}
+
+table {
+    color: #F1E6D0;
+    border: 0.5px solid #F1E6D0;
+    border-collapse: separate;
+}
+
+td, th {
+    padding: 0;
+}
+
+#compare {
+    top: 6vw;
+}
+
+h2 {
+    text-align: center;
+}
+
+@media only screen and (max-width: 845px) {
+    #champions, #flame, #about-lolapp{
+        top: -9.3vw;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    #champions, #flame, #about-lolapp {
+        top: -9.7vw;
+    }
+    .col-s6, .col-s12-offset-s12{
+        width: 100%;
+        float: none;
+    }
+}
+
+@media only screen and (max-width: 376px) {
+    #champions, #flame, #about-lolapp {
+        top: -11.7vw;
+    }
+}
+
+@media only screen and (max-width: 667px) {
+    div#champ-container-mobile.container.row {
+        margin: 0;
+        width: 90%;
+        position: relative;
+        top: 30vw;
+        justify-content: space-around;
+    }
+}
+
+@media only screen and (max-width: 865px) {
+    #champ-container {
+        display: none;
+    }
+    #champ-container-mobile {
+        display: block;
+        position: relative;
+        top: 12vw;
+
+    }
+    html {
+        width: 100vw;
+    }
+    .row .col.s3 {
+        margin-left: auto;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .row .col.s3 {
+    max-height: 198px;
+    }
+}
+
+
+
+/* 865px de ancho es el tope para que se vean bien los charts de la cards */
+
+#flame-section p {
+color: #f1e6d0;
+}
+
+#flame-section {
+    position: relative;
+}
+
+#image-report, #image-report-two {
+    margin: 0 auto;
+    display: block;
+    align-content: center;
+}
+
+#image-report, #image-report-two, #image-lolapp{
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: #937341;
+}
+
+#about-lolapp-section .row{
+    width:100%;
+    height: auto;
+}
+   
+/* #lolapp, #image-lolapp{
+    width: 50%;
+    float: left;
+} */
+
+#image-lolapp{
+    margin-top:25px;
+}
+
+#lolapp p {
+    text-align: justify;
+}
+#lolapp a{
+    display: block;
+    margin: 0 auto;
+    width:200px;
+}
+
+#about-lolapp-section{
+    color:#f1e6d0;
+}
+
+@media only screen and (min-width: 600px){
+    #about-lolapp-section, #flame-section{
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 320px){
+    div#champ-container-mobile.row{
+        top: 45vw !important;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    #image-lolapp{
+        width: 150%;
+        height: 150%;
+        margin: 12.5px 0;
+    }
+    #lolapp p{
+        margin: 0 auto;
+        width: 100%;
+    }
+    #lolapp a{
+        display: block;
+    }
+}
+
+#button1, #button2{
+    background-color: #0a0a0c;
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: #937341;
+    line-height: 35px !important;
+    }
+
+#button1:hover, #button2:hover{
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: white;
+}
+
+.text-color{
+    color: #937341;
+}
+
+#flame-section, #about-lolapp-section{
+    display: none;
+}
+
+.champ-sprite {
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+#about-lolapp, #champions, #flame {
+    top: -8.2vw;
+}
+
+#champions {
+    left: -2.5vw;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;    
+}
