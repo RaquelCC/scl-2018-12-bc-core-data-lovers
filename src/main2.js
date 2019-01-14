@@ -1,4 +1,4 @@
-// fetch local porque la data de la api viene distinta
+// fetch local
 fetch('data/lol/lol.json')
     .then(data => data.json())
     .then (data => {
@@ -8,6 +8,13 @@ fetch('data/lol/lol.json')
         window.ImageMap('img[usemap]'); 
         showChampsData();
     })
+
+
+// preloader
+window.addEventListener("load", () => {
+    document.getElementById("preloader").style.display = "none";
+    document.getElementById("root").className = "";
+})
 
 // inicializador del select materialize
 document.addEventListener('DOMContentLoaded', function() {
@@ -20,7 +27,7 @@ function showChamps (data) {
     document.getElementById("champ-container-mobile").innerHTML = "";
     data.forEach(champ => {
         document.getElementById("champ-container").innerHTML += `
-        <div class="card col s3">
+        <div id="${champ.id}" class="card col s3 card-big">
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="responsive-img img-champion" src="${champ.splash}">
             </div>
@@ -37,7 +44,7 @@ function showChamps (data) {
     })
     data.forEach(champ => {
         document.getElementById("champ-container-mobile").innerHTML += `
-        <div class="col s3 m2">
+        <div id="${champ.id}2" class="col s3 m2 card-small">
             <div class="card mobile-version">
                 <div class="card-image">
                     <img src="${champ.img}" class="champ-sprite">
@@ -50,8 +57,6 @@ function showChamps (data) {
         `
     })
 }
-
-
 
 // HTMLCollection con los canvases y array para guardar los gráficos que van al otro lado de las
 // tarjetidas de cada champ
@@ -104,49 +109,6 @@ function initializeCharts (data) {
         })
     }
 }
-
-// interacción filtros
-document.getElementById("champion-filters").addEventListener("change", userInteract);
-
-// interacción usuario 
-function userInteract() {
-    if (document.getElementById("sort").value === ""){
-        return;
-    }
-    let filtersActive = [];
-    const filters = document.getElementsByClassName("filter");
-    for (let i = 0; i<filters.length; i++) {
-        if (filters[i].checked === true) {
-            filtersActive.push(filters[i].value);
-        }
-    }
-    let sortBy;
-    let sortOrder;
-    switch (document.getElementById("sort").value) {
-        case "az":
-            sortBy = "name";
-            sortOrder = "ascending";
-            break;
-        case "za":
-            sortBy = "name";
-            sortOrder = "descending";
-            break;
-        case "oldest":
-            sortBy = "key";
-            sortOrder = "ascending";
-            break;
-        case "newest":
-            sortBy = "key";
-            sortOrder = "descending"
-            break;
-    }
-    showChamps(window.championManage.searchChamp(window.championManage.sortData(window.championManage.filterData(window.championData, filtersActive), sortBy,sortOrder), document.getElementById("search-input").value));
-    initializeCharts(window.championManage.searchChamp(window.championManage.sortData(window.championManage.filterData(window.championData, filtersActive), sortBy,sortOrder), document.getElementById("search-input").value));
-    champIndividualDiv(window.championManage.searchChamp(window.championManage.sortData(window.championManage.filterData(window.championData, filtersActive), sortBy,sortOrder), document.getElementById("search-input").value), championImages);
-    champIndividualDiv(window.championManage.searchChamp(window.championManage.sortData(window.championManage.filterData(window.championData, filtersActive), sortBy,sortOrder), document.getElementById("search-input").value), championSprites);
-
-}
-document.getElementById("sort").addEventListener("change", userInteract)
 
 // función que le asigna a cada imagen una función que genera la página individual del champion
 let championImages = document.getElementsByClassName("img-champion");
@@ -279,7 +241,7 @@ function champIndividualDiv(data, img) {
                 champChart.update();
                 
             })
-            // fiunción que inicializa chart con gráfico comparativo
+            // función que inicializa chart con gráfico comparativo
             function initializeCompare(data) {
                 let averageChampion = window.championManage.averageStats(data);
                 let compareCanvas = document.getElementById("compare-chart").getContext('2d');
@@ -327,14 +289,6 @@ function champIndividualDiv(data, img) {
 
 }
 
-
-// función de la barra de busqueda
-document.getElementById("search-input").addEventListener("keydown", (e) => {
-    if (e.keyCode === 13) {
-        userInteract();
-       }
-})
-
 function showChampsData() {
     
     showChamps(window.championData);
@@ -344,67 +298,57 @@ function showChampsData() {
 }
 
 
-// funcionalidad botones del image-map
-document.getElementById("flame").addEventListener("click", (evento) => {
-    evento.preventDefault();
-
-    document.getElementById("flame-section").style.display = "block";
-    // document.getElementById("filters").style.display = "none";
-    document.getElementById("root").style.display = "none";
-    // document.getElementById("general-champ-container").style.display = "none";
-    document.getElementById("about-lolapp-section").style.display = "none";
-    // document.getElementById("individual-champs").style.display = "none";
-    window.location.href = "#header";
-
-});
-
-document.getElementById("about-lolapp").addEventListener("click", (evento) => {
-    evento.preventDefault();
-
-    document.getElementById("about-lolapp-section").style.display = "block";
-    // document.getElementById("filters").style.display = "none";
-    document.getElementById("root").style.display = "none";
-    // document.getElementById("general-champ-container").style.display = "none";
-    document.getElementById("flame-section").style.display = "none";
-    // document.getElementById("individual-champs").style.display = "none";
-    window.location.href = "#header";
-
-});
-
-document.getElementById("button1").addEventListener("click", back);
-
-document.getElementById("button2").addEventListener("click", back);
-
-document.getElementById("champions").addEventListener("click", back)
-
-function back() {
-    setTimeout(() => {
-        document.getElementById("individual-champs").style.display = "none";
-        document.getElementById("about-lolapp-section").style.display = "none";
-        document.getElementById("flame-section").style.display = "none";
-        document.getElementById("root").style.display = "none";
-        document.getElementById("preloader").style.display = "block";
-        let filtersToClear = document.getElementsByClassName("filter");
-        for (let i = 0; i<filtersToClear.length; i++) {
-            filtersToClear[i].checked = false;
+function userInteract () {
+    if (document.getElementById("sort").value === ""){
+        return;
+    }
+    let filtersActive = [];
+    const filters = document.getElementsByClassName("filter");
+    for (let i = 0; i<filters.length; i++) {
+        if (filters[i].checked === true) {
+            filtersActive.push(filters[i].value);
         }
+    }
+    let sortBy;
+    let sortOrder;
+    switch (document.getElementById("sort").value) {
+        case "az":
+            sortBy = "name";
+            sortOrder = "ascending";
+            break;
+        case "za":
+            sortBy = "name";
+            sortOrder = "descending";
+            break;
+        case "oldest":
+            sortBy = "key";
+            sortOrder = "ascending";
+            break;
+        case "newest":
+            sortBy = "key";
+            sortOrder = "descending"
+            break;
+    }
 
-    }, 0)
-    setTimeout(userInteract, 200);
-    setTimeout(() => {
-        document.getElementById("preloader").style.display = "none";
-        document.getElementById("root").style.display = "block";
-        document.getElementById("filters").style.display = "block";
-        document.getElementById("order-and-search").style.display = "flex";
-        document.getElementById("general-champ-container").style.display = "block";
-        window.location.href = "#header";
+    let championCardsBig = document.getElementsByClassName("card-big");
+    let championCardsSmall = document.getElementsByClassName("card-small");
+    let userChampNames = [];
+    (window.championManage.searchChamp(window.championManage.sortData(window.championManage.filterData(window.championData, filtersActive), sortBy,sortOrder), document.getElementById("search-input").value)).forEach(champ => {
+        userChampNames.push(champ.id);
+    })
+    for (let i = 0; i<championCardsBig.length; i++) {
+        if (userChampNames.indexOf(championCardsBig[i].id) === -1) {
+            championCardsBig[i].style.display = "none";
+            championCardsSmall[i].style.display = "none";
+        }else if (userChampNames.indexOf(championCardsBig[i].id) !== -1) {
+            championCardsBig[i].style.display = "block";
+            championCardsSmall[i].style.display = "block";
+        }
+        document.getElementById(userChampNames[i]).style.order = i;
+        document.getElementById(userChampNames[i]+"2").style.order = i;
+    }
 
-    }, 300)
 }
 
-// preloader
-window.addEventListener("load", () => {
-    document.getElementById("preloader").style.display = "none";
-    document.getElementById("root").className = "";
-})
-
+document.getElementById("champion-filters").addEventListener("change", userInteract);
+document.getElementById("sort").addEventListener("change", userInteract);
