@@ -191,6 +191,7 @@ input.select-dropdown.dropdown-trigger {
     top: -5vw;
     display: none;
     z-index: 1;
+    display: grid;
 }
 
 #champ-name-title {
@@ -361,7 +362,7 @@ color: #f1e6d0;
     }
 }
 
-#button1, #button2{
+#button1, #button2, #button3{
     background-color: #0a0a0c;
     border: 1px solid;
     border-radius: 10px;
@@ -369,7 +370,7 @@ color: #f1e6d0;
     line-height: 35px !important;
     }
 
-#button1:hover, #button2:hover{
+#button1:hover, #button2:hover, #button3:hover{
     border: 1px solid;
     border-radius: 10px;
     border-color: white;
@@ -404,3 +405,19 @@ color: #f1e6d0;
     flex-direction: row;
     flex-wrap: wrap;    
 }
+
+#container-button3 {
+    order: 135;
+}
+
+canvas#compare-chart.chartjs-render-monitor {
+    max-width: 100%;
+}
+
+/* div#compare-chart-container.col.s12 {
+    position: relative;
+} */
+
+/* div#individual-champs.container.row {
+    display: grid;
+} */
