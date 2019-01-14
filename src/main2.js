@@ -56,6 +56,10 @@ function showChamps (data) {
         </div>
         `
     })
+    document.getElementById("champ-container").innerHTML += `
+    <div id="container-button3" class="col s12 center-align"><br><a href="#header" class="waves-effect waves-light btn" id="button3">Subir</a>
+        </div>
+    `
 }
 
 // HTMLCollection con los canvases y array para guardar los gráficos que van al otro lado de las
@@ -120,7 +124,7 @@ function champIndividualDiv(data, img) {
         img[i].addEventListener("click", () => {
             window.location.href = "#header";
             document.getElementById("filters").style.display = "none";
-            document.getElementById("order-and-search").style.display = "none";
+            // document.getElementById("order-and-search").style.display = "none";
             // document.getElementById("champ-container").style.display = "none";
             // document.getElementById("champ-container-mobile").style.display = "none";
             document.getElementById("general-champ-container").style.display = "none";
@@ -203,7 +207,7 @@ function champIndividualDiv(data, img) {
                     </tbody>
                     </table>                  
             </div>
-            <div class="row">
+            <div>
             <div class="col s6 offset-s3" id="compare center-align">
                     <p>Comparar con promedio de:</p>
                     <select id="compare-filters" multiple>
@@ -224,8 +228,7 @@ function champIndividualDiv(data, img) {
                 <canvas id="compare-chart">
                 
                 </canvas>
-            </div>
-                       
+            </div>     
             `;
             //inicializa select de esta pagina
             window.M.AutoInit();
@@ -297,7 +300,8 @@ function showChampsData() {
     champIndividualDiv(window.championData, championSprites);
 }
 
-
+// funcion de interacción de usuario, cada vez que el usuario clickea un filtro, ordena o busca, se ejecuta esta funcion
+// la función revisa todos los parametros que el usuario puede seleccionar y en base a eso muestra los champions
 function userInteract () {
     if (document.getElementById("sort").value === ""){
         return;
@@ -329,13 +333,21 @@ function userInteract () {
             sortOrder = "descending"
             break;
     }
-
+    // colecciones HTML de las tarjetitas grandes y pequeñas
     let championCardsBig = document.getElementsByClassName("card-big");
     let championCardsSmall = document.getElementsByClassName("card-small");
+    // ids de los champs luego de aplicar filtros, orden y busqueda, esto sirve para comparar con las ids de las tarjetas
+    // y asi decidir cual mostrar y cual no
     let userChampNames = [];
     (window.championManage.searchChamp(window.championManage.sortData(window.championManage.filterData(window.championData, filtersActive), sortBy,sortOrder), document.getElementById("search-input").value)).forEach(champ => {
         userChampNames.push(champ.id);
     })
+    for (let i = 0; i<userChampNames.length; i++) {
+        // reordenar tarjetas para el sort
+        document.getElementById(userChampNames[i]).style.order = i;
+        document.getElementById(userChampNames[i]+"2").style.order = i;
+    }
+    // display de las tarjetas para el filter y search
     for (let i = 0; i<championCardsBig.length; i++) {
         if (userChampNames.indexOf(championCardsBig[i].id) === -1) {
             championCardsBig[i].style.display = "none";
@@ -344,11 +356,63 @@ function userInteract () {
             championCardsBig[i].style.display = "block";
             championCardsSmall[i].style.display = "block";
         }
-        document.getElementById(userChampNames[i]).style.order = i;
-        document.getElementById(userChampNames[i]+"2").style.order = i;
     }
 
 }
 
+// checkboxes de filtro
 document.getElementById("champion-filters").addEventListener("change", userInteract);
+// select de sort
 document.getElementById("sort").addEventListener("change", userInteract);
+
+// función de la barra de busqueda
+document.getElementById("search-input").addEventListener("keydown", (e) => {
+    if (e.keyCode === 13) {
+        userInteract();
+       }
+})
+
+// boton "Sobre LOLApp"
+document.getElementById("about-lolapp").addEventListener("click", () => {
+    document.getElementById("root").style.display = "none";
+    document.getElementById("preloader").style.display = "none";
+    document.getElementById("flame-section").style.display = "none";
+    document.getElementById("about-lolapp-section").style.display = "block";
+})
+
+// boton "Flame"
+document.getElementById("flame").addEventListener("click", () => {
+    document.getElementById("root").style.display = "none";
+    document.getElementById("preloader").style.display = "none";
+    document.getElementById("about-lolapp-section").style.display = "none";
+    document.getElementById("flame-section").style.display = "block";
+})
+
+// funcion para los botones de regreso a los champs
+function back() {
+    // limpia filtros
+    let filtersToClear = document.getElementsByClassName("filter");
+    for (let i = 0; i<filtersToClear.length; i++) {
+        filtersToClear[i].checked = false;
+    }
+    // para resetear el order
+    document.getElementsByTagName("select")[0][1].selected = true;
+    window.M.AutoInit(); // sin esto no cambiaba el display del select, solo el valor X_X
+    // display reseteado
+    userInteract()
+    // los divs
+    document.getElementById("preloader").style.display = "none";
+    document.getElementById("about-lolapp-section").style.display = "none";
+    document.getElementById("flame-section").style.display = "none";
+    document.getElementById("individual-champs").style.display = "none";
+    document.getElementById("filters").style.display = "block";
+    document.getElementById("general-champ-container").style.display = "block";
+    document.getElementById("root").style.display = "block";
+}
+
+// boton "champions"
+document.getElementById("champions").addEventListener("click", back);
+
+// botones de volver al inicio
+document.getElementById("button1").addEventListener("click", back);
+document.getElementById("button2").addEventListener("click", back);
