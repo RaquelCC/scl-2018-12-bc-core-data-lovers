@@ -421,3 +421,19 @@ canvas#compare-chart.chartjs-render-monitor {
 /* div#individual-champs.container.row {
     display: grid;
 } */
+
+th {
+    text-align: center;
+}
+
+.skills-table td, .skills-table th {
+    padding: 10px;
+}
+
+td {
+    vertical-align: middle;
+}
+
+.skills-table {
+    margin-bottom: 30px;
+}

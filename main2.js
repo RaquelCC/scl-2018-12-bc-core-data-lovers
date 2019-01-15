@@ -122,171 +122,220 @@ function champIndividualDiv(data, img) {
     window.ImageMap('img[usemap]'); 
     for (let i= 0; i<img.length; i++) {
         img[i].addEventListener("click", () => {
-            window.location.href = "#header";
-            document.getElementById("filters").style.display = "none";
-            // document.getElementById("order-and-search").style.display = "none";
-            // document.getElementById("champ-container").style.display = "none";
-            // document.getElementById("champ-container-mobile").style.display = "none";
-            document.getElementById("general-champ-container").style.display = "none";
-            document.getElementById("individual-champs").style.display = "block";
-            document.getElementById("individual-champs").innerHTML = `            
-            <div id="champ-name-title" class="col s12 center-align">
-                <p id="champ-name">${data[i].name}</p>
-                <p id="champ-title">${data[i].title}</p><br><br>
-            </div>
-            <div class="col s12 m6">
-                <img src="${data[i].splash}" alt="${data[i].name}" class="responsive-img">
-                <p class="center-align">Roles: ${data[i].tags.join(" - ")}</p>
-            </div>
-            <div class="col s12 m6">
-                <table class="centered">
-                    <thead>
+            let champFetch;
+            //fetch api...
+            fetch("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/"+data[i].id+".json")
+                .then(dataFetch => dataFetch.json())
+                .then(dataFetch => {
+                    champFetch = dataFetch["data"][data[i].id];
+                    window.location.href = "#header";
+                    document.getElementById("filters").style.display = "none";
+                    // document.getElementById("order-and-search").style.display = "none";
+                    // document.getElementById("champ-container").style.display = "none";
+                    // document.getElementById("champ-container-mobile").style.display = "none";
+                    document.getElementById("general-champ-container").style.display = "none";
+                    document.getElementById("individual-champs").style.display = "block";
+                    document.getElementById("individual-champs").innerHTML = `            
+                    <div id="champ-name-title" class="col s12 center-align">
+                        <p id="champ-name">${data[i].name}</p>
+                        <p id="champ-title">${data[i].title}</p><br><br>
+                    </div>
+                    <div class="col s12">
+                        <img src="${data[i].splash}" alt="${data[i].name}" class="responsive-img">
+                        <p><h5 class="center-align">Roles: ${data[i].tags.join(" - ")}</h5></p>
+                    </div>
+                    <div class="col s12">
+                    <h3 class="center">Habilidades</h3>
+                    <table class="skills-table">
+                        <thead>
+                            <tr class="centered">
+                               <th><h6>Sprite</h6></th>
+                               <th><h6>Name</h6></th>
+                               <th><h6>Description</h6></th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         <tr>
-                            <th>Stat</th>
-                            <th>Base (a lvl 1)</th>
-                            <th>Growth per lvl</th>
-                        </tr>
-                    </thead>
-            
-                    <tbody>
-                        <tr>
-                        <td>HP</td>
-                        <td>${data[i].stats.hp}</td>
-                        <td>${data[i].stats.hpperlevel}</td>
-                        </tr>
-                        <tr>
-                        <td>${data[i].partype}</td>
-                        <td>${data[i].stats.mp}</td>
-                        <td>${data[i].stats.mpperlevel}</td>
-                        </tr>
-                        <tr>
-                        <td>Movement Speed</td>
-                        <td>${data[i].stats.movespeed}</td>
-                        <td>-</td>
+                            <td><img src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/passive/${champFetch.passive.image.full}"></td>
+                            <td>${champFetch.passive.name}<br>(Passive)</td>
+                            <td>${champFetch.passive.description}</td>
                         </tr>
                         <tr>
-                        <td>Armor</td>
-                        <td>${data[i].stats.armor}</td>
-                        <td>${data[i].stats.armorperlevel}</td>
+                            <td><img src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/${champFetch.spells[0].image.full}"></td>
+                            <td>${champFetch.spells[0].name}</td>
+                            <td>${champFetch.spells[0].description}</td>
                         </tr>
                         <tr>
-                        <td>Spellblock</td>
-                        <td>${data[i].stats.spellblock}</td>
-                        <td>${data[i].stats.spellblockperlevel}</td>
+                            <td><img src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/${champFetch.spells[1].image.full}"></td>
+                            <td>${champFetch.spells[1].name}</td>
+                            <td>${champFetch.spells[1].description}</td>
                         </tr>
                         <tr>
-                        <td>Attack Range</td>
-                        <td>${data[i].stats.attackrange}</td>
-                        <td>-</td>
+                            <td><img src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/${champFetch.spells[2].image.full}"></td>
+                            <td>${champFetch.spells[2].name}</td>
+                            <td>${champFetch.spells[2].description}</td>
                         </tr>
                         <tr>
-                        <td>HP Regen</td>
-                        <td>${data[i].stats.hpregen}</td>
-                        <td>${data[i].stats.hpregenperlevel}</td>
+                            <td><img src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/${champFetch.spells[3].image.full}"></td>
+                            <td>${champFetch.spells[3].name}</td>
+                            <td>${champFetch.spells[3].description}</td>
                         </tr>
-                        <tr>
-                        <td>MP Regen</td>
-                        <td>${data[i].stats.mpregen}</td>
-                        <td>${data[i].stats.mpregenperlevel}</td>
-                        </tr>
-                        <tr>
-                        <td>Crit</td>
-                        <td>${data[i].stats.crit}</td>
-                        <td>${data[i].stats.critperlevel}</td>
-                        </tr>
-                        <tr>
-                        <td>Attack Damage</td>
-                        <td>${data[i].stats.attackdamage}</td>
-                        <td>${data[i].stats.attackdamageperlevel}</td>
-                        </tr>
-                        <tr>
-                        <td>Attack Speed</td>
-                        <td>${data[i].stats.attackspeedoffset}</td>
-                        <td>${data[i].stats.attackspeedperlevel}</td>
-                        </tr>
-                    </tbody>
-                    </table>                  
-            </div>
-            <div>
-            <div class="col s6 offset-s3" id="compare center-align">
-                    <p>Comparar con promedio de:</p>
-                    <select id="compare-filters" multiple>
-                    <option value="" disabled>Todos los Champions</option>
-                    <option value="Assassin">Assassin</option>
-                    <option value="Fighter">Fighter</option>
-                    <option value="Tank">Tank</option>
-                    <option value="Mage">Mage</option>
-                    <option value="Marksman">Marksman</option>
-                    <option value="Support">Support</option>
-                    <option value="Melee">Melee</option>
-                    <option value="Ranged">Ranged</option>
-                    </select>
+                        </tbody>
+                    </table>
+                    </div>
+                    <div class="col s12 m6">
+                        <table class="centered">
+                            <thead>
+                                <tr>
+                                    <th>Stat</th>
+                                    <th>Base (a lvl 1)</th>
+                                    <th>Growth per lvl</th>
+                                </tr>
+                            </thead>
                     
-            </div>
-            <div>
-            <div class="col s12" id="compare-chart-container">
-                <canvas id="compare-chart">
-                
-                </canvas>
-            </div>     
-            `;
-            //inicializa select de esta pagina
-            window.M.AutoInit();
-            // función que altera gráfico de comparación en base a los filtros que se apliquen
-            let champChart;
-            document.getElementById("compare-filters").addEventListener("change", () => {
-                let compareFilters = [];
-                for (let i = 0; i<document.getElementById("compare-filters").selectedOptions.length; i++) {
-                    compareFilters.push(document.getElementById("compare-filters").selectedOptions[i].value);
-                }
-                let averageChampion = window.championManage.averageStats(window.championManage.filterData(window.championData, compareFilters));
-                champChart.data.datasets[1].data = [averageChampion.hp, averageChampion.hpperlevel, averageChampion.mp, averageChampion.mpperlevel, averageChampion.movespeed, averageChampion.armor, averageChampion.armorperlevel, averageChampion.spellblock, averageChampion.spellblockperlevel, averageChampion.attackrange, averageChampion.hpregen, averageChampion.hpregenperlevel, averageChampion.mp, averageChampion.mpregenperlevel, averageChampion.crit, averageChampion.critperlevel, averageChampion.attackdamage, averageChampion.attackdamageperlevel, averageChampion.attackspeedoffset, averageChampion.attackspeedperlevel];
-                champChart.update();
-                
-            })
-            // función que inicializa chart con gráfico comparativo
-            function initializeCompare(data) {
-                let averageChampion = window.championManage.averageStats(data);
-                let compareCanvas = document.getElementById("compare-chart").getContext('2d');
-                champChart = new window.Chart(compareCanvas, {
-                    type: 'bar',
-                    data: {
-                        labels: ["HP", "HP per lvl", "MP", "MP per lvl", "Movement Speed", "Armor", "Armor per lvl", "Spellblock", "Spellblock per lvl", "Attack Range", "HP Regen", "HP Regen per lvl", "MP Regen", "MP Regen per lvl", "Crit", "Crit per lvl", "Attack Damage", "Attack Damage per lvl", "Attack Speed", "Attack Speed per lvl"],
-                        datasets: [{
-                            label: data[i].name,
-                            data: [data[i].stats.hp, data[i].stats.hpperlevel, data[i].stats.mp, data[i].stats.mpperlevel, data[i].stats.movespeed, data[i].stats.armor, data[i].stats.armorperlevel, data[i].stats.spellblock, data[i].stats.spellblockperlevel, data[i].stats.attackrange, data[i].stats.hpregen, data[i].stats.hpregenperlevel, data[i].stats.mp, data[i].stats.mpregenperlevel, data[i].stats.crit, data[i].stats.critperlevel, data[i].stats.attackdamage, data[i].stats.attackdamageperlevel, data[i].stats.attackspeedoffset, data[i].stats.attackspeedperlevel],
-                            backgroundColor: 'rgba(255, 99, 132, 0.8)',
-                            borderWidth: 1
-                        },
-                        {
-                            label: 'Champ Promedio',
-                            data: [averageChampion.hp, averageChampion.hpperlevel, averageChampion.mp, averageChampion.mpperlevel, averageChampion.movespeed, averageChampion.armor, averageChampion.armorperlevel, averageChampion.spellblock, averageChampion.spellblockperlevel, averageChampion.attackrange, averageChampion.hpregen, averageChampion.hpregenperlevel, averageChampion.mp, averageChampion.mpregenperlevel, averageChampion.crit, averageChampion.critperlevel, averageChampion.attackdamage, averageChampion.attackdamageperlevel, averageChampion.attackspeedoffset, averageChampion.attackspeedperlevel],
-                            backgroundColor: 'rgba(54, 162, 235, 0.8)',
-                            borderWidth: 1
-                        }
-                    ],
+                            <tbody>
+                                <tr>
+                                <td>HP</td>
+                                <td>${data[i].stats.hp}</td>
+                                <td>${data[i].stats.hpperlevel}</td>
+                                </tr>
+                                <tr>
+                                <td>${data[i].partype}</td>
+                                <td>${data[i].stats.mp}</td>
+                                <td>${data[i].stats.mpperlevel}</td>
+                                </tr>
+                                <tr>
+                                <td>Movement Speed</td>
+                                <td>${data[i].stats.movespeed}</td>
+                                <td>-</td>
+                                </tr>
+                                <tr>
+                                <td>Armor</td>
+                                <td>${data[i].stats.armor}</td>
+                                <td>${data[i].stats.armorperlevel}</td>
+                                </tr>
+                                <tr>
+                                <td>Spellblock</td>
+                                <td>${data[i].stats.spellblock}</td>
+                                <td>${data[i].stats.spellblockperlevel}</td>
+                                </tr>
+                                <tr>
+                                <td>Attack Range</td>
+                                <td>${data[i].stats.attackrange}</td>
+                                <td>-</td>
+                                </tr>
+                                <tr>
+                                <td>HP Regen</td>
+                                <td>${data[i].stats.hpregen}</td>
+                                <td>${data[i].stats.hpregenperlevel}</td>
+                                </tr>
+                                <tr>
+                                <td>MP Regen</td>
+                                <td>${data[i].stats.mpregen}</td>
+                                <td>${data[i].stats.mpregenperlevel}</td>
+                                </tr>
+                                <tr>
+                                <td>Crit</td>
+                                <td>${data[i].stats.crit}</td>
+                                <td>${data[i].stats.critperlevel}</td>
+                                </tr>
+                                <tr>
+                                <td>Attack Damage</td>
+                                <td>${data[i].stats.attackdamage}</td>
+                                <td>${data[i].stats.attackdamageperlevel}</td>
+                                </tr>
+                                <tr>
+                                <td>Attack Speed</td>
+                                <td>${data[i].stats.attackspeedoffset}</td>
+                                <td>${data[i].stats.attackspeedperlevel}</td>
+                                </tr>
+                            </tbody>
+                            </table>                  
+                    </div>
+                    <div>
+                    <div class="col s6 offset-s3" id="compare center-align">
+                            <p>Comparar con promedio de:</p>
+                            <select id="compare-filters" multiple>
+                            <option value="" disabled>Todos los Champions</option>
+                            <option value="Assassin">Assassin</option>
+                            <option value="Fighter">Fighter</option>
+                            <option value="Tank">Tank</option>
+                            <option value="Mage">Mage</option>
+                            <option value="Marksman">Marksman</option>
+                            <option value="Support">Support</option>
+                            <option value="Melee">Melee</option>
+                            <option value="Ranged">Ranged</option>
+                            </select>
+                            
+                    </div>
+                    <div>
+                    <div class="col s12" id="compare-chart-container">
+                        <canvas id="compare-chart">
                         
-                    },
-                    options: {
-                        tooltips: {
-                            intersect: false
-                        },
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true,
-                                    stepSize: 50
-                                }
-                            }]
+                        </canvas>
+                    </div>     
+                    `;
+                    //inicializa select de esta pagina
+                    window.M.AutoInit();
+                    // función que altera gráfico de comparación en base a los filtros que se apliquen
+                    let champChart;
+                    document.getElementById("compare-filters").addEventListener("change", () => {
+                        let compareFilters = [];
+                        for (let i = 0; i<document.getElementById("compare-filters").selectedOptions.length; i++) {
+                            compareFilters.push(document.getElementById("compare-filters").selectedOptions[i].value);
                         }
+                        let averageChampion = window.championManage.averageStats(window.championManage.filterData(window.championData, compareFilters));
+                        champChart.data.datasets[1].data = [averageChampion.hp, averageChampion.hpperlevel, averageChampion.mp, averageChampion.mpperlevel, averageChampion.movespeed, averageChampion.armor, averageChampion.armorperlevel, averageChampion.spellblock, averageChampion.spellblockperlevel, averageChampion.attackrange, averageChampion.hpregen, averageChampion.hpregenperlevel, averageChampion.mp, averageChampion.mpregenperlevel, averageChampion.crit, averageChampion.critperlevel, averageChampion.attackdamage, averageChampion.attackdamageperlevel, averageChampion.attackspeedoffset, averageChampion.attackspeedperlevel];
+                        champChart.update();
+                        
+                    })
+                    // función que inicializa chart con gráfico comparativo
+                    function initializeCompare(data) {
+                        let averageChampion = window.championManage.averageStats(data);
+                        let compareCanvas = document.getElementById("compare-chart").getContext('2d');
+                        champChart = new window.Chart(compareCanvas, {
+                            type: 'bar',
+                            data: {
+                                labels: ["HP", "HP per lvl", "MP", "MP per lvl", "Movement Speed", "Armor", "Armor per lvl", "Spellblock", "Spellblock per lvl", "Attack Range", "HP Regen", "HP Regen per lvl", "MP Regen", "MP Regen per lvl", "Crit", "Crit per lvl", "Attack Damage", "Attack Damage per lvl", "Attack Speed", "Attack Speed per lvl"],
+                                datasets: [{
+                                    label: data[i].name,
+                                    data: [data[i].stats.hp, data[i].stats.hpperlevel, data[i].stats.mp, data[i].stats.mpperlevel, data[i].stats.movespeed, data[i].stats.armor, data[i].stats.armorperlevel, data[i].stats.spellblock, data[i].stats.spellblockperlevel, data[i].stats.attackrange, data[i].stats.hpregen, data[i].stats.hpregenperlevel, data[i].stats.mp, data[i].stats.mpregenperlevel, data[i].stats.crit, data[i].stats.critperlevel, data[i].stats.attackdamage, data[i].stats.attackdamageperlevel, data[i].stats.attackspeedoffset, data[i].stats.attackspeedperlevel],
+                                    backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: 'Champ Promedio',
+                                    data: [averageChampion.hp, averageChampion.hpperlevel, averageChampion.mp, averageChampion.mpperlevel, averageChampion.movespeed, averageChampion.armor, averageChampion.armorperlevel, averageChampion.spellblock, averageChampion.spellblockperlevel, averageChampion.attackrange, averageChampion.hpregen, averageChampion.hpregenperlevel, averageChampion.mp, averageChampion.mpregenperlevel, averageChampion.crit, averageChampion.critperlevel, averageChampion.attackdamage, averageChampion.attackdamageperlevel, averageChampion.attackspeedoffset, averageChampion.attackspeedperlevel],
+                                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                                    borderWidth: 1
+                                }
+                            ],
+                                
+                            },
+                            options: {
+                                tooltips: {
+                                    intersect: false
+                                },
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true,
+                                            stepSize: 50
+                                        }
+                                    }]
+                                }
+                            }
+                        }
+            
+            
+                        )
+        
                     }
-                }
-    
-    
-                )
+                    initializeCompare(data);
+                })
 
-            }
-            initializeCompare(data);
+
+            
         })
     }
 
@@ -416,3 +465,8 @@ document.getElementById("champions").addEventListener("click", back);
 // botones de volver al inicio
 document.getElementById("button1").addEventListener("click", back);
 document.getElementById("button2").addEventListener("click", back);
+
+
+
+// scl182041
+// testeo dom
