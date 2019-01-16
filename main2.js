@@ -114,10 +114,11 @@ function initializeCharts (data) {
     }
 }
 
-// función que le asigna a cada imagen una función que genera la página individual del champion
+// colección HTML de las imagenes grandes y pequeñas de las tarjetas de cada champion
 let championImages = document.getElementsByClassName("img-champion");
 let championSprites = document.getElementsByClassName("champ-sprite");
 
+// función que le asigna a cada imagen una función que genera la página individual del champion
 function champIndividualDiv(data, img) {
     window.ImageMap('img[usemap]'); 
     for (let i= 0; i<img.length; i++) {
@@ -142,46 +143,69 @@ function champIndividualDiv(data, img) {
                     </div>
                     <div class="col s12">
                         <img src="${data[i].splash}" alt="${data[i].name}" class="responsive-img">
-                        <p><h5 class="center-align">Roles: ${data[i].tags.join(" - ")}</h5></p>
+                        <p><h5 class="center-align" >Roles:   <span id="roles"></span></h5></p>
                     </div>
                     <div class="col s12">
-                    <h3 class="center">Habilidades</h3>
-                    <table class="skills-table">
-                        <thead>
-                            <tr class="centered">
-                               <th><h6>Sprite</h6></th>
-                               <th><h6>Name</h6></th>
-                               <th><h6>Description</h6></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><img src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/passive/${champFetch.passive.image.full}"></td>
-                            <td>${champFetch.passive.name}<br>(Passive)</td>
-                            <td>${champFetch.passive.description}</td>
-                        </tr>
-                        <tr>
-                            <td><img src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/${champFetch.spells[0].image.full}"></td>
-                            <td>${champFetch.spells[0].name}</td>
-                            <td>${champFetch.spells[0].description}</td>
-                        </tr>
-                        <tr>
-                            <td><img src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/${champFetch.spells[1].image.full}"></td>
-                            <td>${champFetch.spells[1].name}</td>
-                            <td>${champFetch.spells[1].description}</td>
-                        </tr>
-                        <tr>
-                            <td><img src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/${champFetch.spells[2].image.full}"></td>
-                            <td>${champFetch.spells[2].name}</td>
-                            <td>${champFetch.spells[2].description}</td>
-                        </tr>
-                        <tr>
-                            <td><img src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/${champFetch.spells[3].image.full}"></td>
-                            <td>${champFetch.spells[3].name}</td>
-                            <td>${champFetch.spells[3].description}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                        <ul class="collapsible">
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">filter_drama</i>Habilidades</div>
+                                <div class="collapsible-body">
+                                <table class="skills-table">
+                                <thead>
+                                    <tr class="centered">
+                                       <th><h6>Sprite</h6></th>
+                                       <th><h6>Name</h6></th>
+                                       <th><h6>Description</h6></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><img src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/passive/${champFetch.passive.image.full}"></td>
+                                    <td>${champFetch.passive.name}<br>(Passive)</td>
+                                    <td>${champFetch.passive.description}</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/${champFetch.spells[0].image.full}"></td>
+                                    <td>${champFetch.spells[0].name}</td>
+                                    <td>${champFetch.spells[0].description}</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/${champFetch.spells[1].image.full}"></td>
+                                    <td>${champFetch.spells[1].name}</td>
+                                    <td>${champFetch.spells[1].description}</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/${champFetch.spells[2].image.full}"></td>
+                                    <td>${champFetch.spells[2].name}</td>
+                                    <td>${champFetch.spells[2].description}</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/${champFetch.spells[3].image.full}"></td>
+                                    <td>${champFetch.spells[3].name}</td>
+                                    <td>${champFetch.spells[3].description}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                            </li>
+                        </ul>
+                   
+                    </div>
+                    <div class="col s12">
+                        <div class ="carousel">
+                        <div id="champSkins">
+                            <a class="carousel-item" href="#one!"><img src="https://lorempixel.com/250/250/nature/1"></a>
+                        </div>
+                        </div>
+                        <p class="center" id="skin-name">Holi</p>
                     </div>
                     <div class="col s12 m6">
                         <table class="centered">
@@ -275,6 +299,28 @@ function champIndividualDiv(data, img) {
                         </canvas>
                     </div>     
                     `;
+                    function createCarousel(data) {
+                        document.getElementById("champSkins").innerHTML = "";
+                        data.skins.forEach(skin => {
+                            document.getElementById("champSkins").innerHTML += `
+                            <a class="carousel-item"><img class="skin-img materialboxed responsive-img" src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${data.id}_${skin.num}.jpg"></a>
+                            
+                            `
+                        })
+                    }
+                    function tagLoad(data) {
+                        data[i].tags.forEach(tag => {
+                            console.log(tag)
+                            document.getElementById("roles").innerHTML += `<div class="rol center-align valing-wrapper">
+                           <img class="rol-img responsive-img" src="https://universe.leagueoflegends.com/images/role_icon_${tag.toLowerCase()}.png">${tag}</div>
+                            `
+                        })
+                    }
+                    tagLoad(data);
+                    // <div class="caption center-align">
+                    //     <h3>This is our big Tagline!</h3>
+                    // </div>
+                    createCarousel(champFetch);
                     //inicializa select de esta pagina
                     window.M.AutoInit();
                     // función que altera gráfico de comparación en base a los filtros que se apliquen
@@ -446,9 +492,10 @@ function back() {
     }
     // para resetear el order
     document.getElementsByTagName("select")[0][1].selected = true;
+    document.getElementById("search-input").value = "";
     window.M.AutoInit(); // sin esto no cambiaba el display del select, solo el valor X_X
     // display reseteado
-    userInteract()
+    userInteract();
     // los divs
     document.getElementById("preloader").style.display = "none";
     document.getElementById("about-lolapp-section").style.display = "none";
