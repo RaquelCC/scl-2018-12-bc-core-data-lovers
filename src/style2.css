@@ -437,3 +437,33 @@ td {
 .skills-table {
     margin-bottom: 30px;
 }
+/* 
+.carousel .carousel-item>img{
+    width: 250%;
+} */
+
+.carousel .carousel-item {
+    /* left: -15%; */
+    width: 400px;
+}
+
+a.carousel-item {
+    opacity: 1 !important;
+}
+
+div.collapsible-header {
+    background-color: black;
+}
+
+table.skills-table {
+    border: none;
+}
+
+.rol-img {
+    max-height: 48px;
+    max-width: 48px;
+}
+
+.rol {
+    display: inline-block;
+}
