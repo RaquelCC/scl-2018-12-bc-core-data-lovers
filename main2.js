@@ -143,12 +143,12 @@ function champIndividualDiv(data, img) {
                     </div>
                     <div class="col s12">
                         <img src="${data[i].splash}" alt="${data[i].name}" class="responsive-img">
-                        <p><h5 class="center-align" >Roles:   <span id="roles"></span></h5></p>
+                        <p><h5 class="center-align" ><span id="roles"></span></h5></p>
                     </div>
                     <div class="col s12">
                         <ul class="collapsible">
                             <li>
-                                <div class="collapsible-header"><i class="material-icons">filter_drama</i>Habilidades</div>
+                                <div class="collapsible-header"><img id="abilities" src="./Img/content_type_icon_latest.png"><span class="collapsible-text">ABILITIES</span></div>
                                 <div class="collapsible-body">
                                 <table class="skills-table">
                                 <thead>
@@ -189,25 +189,48 @@ function champIndividualDiv(data, img) {
                                 </div>
                             </li>
                             <li>
-                                <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                                <div class="collapsible-header"><img id="ally-tips" src="./Img/tips.png"><span class="collapsible-text">ALLY TIPS</span></div>
+                                <div class="collapsible-body">
+                                <ul>
+                                    ${champFetch.allytips[0] ? '<li class="tips">'+champFetch.allytips[0]+'</li>' : ""}
+                                    ${champFetch.allytips[1] ? '<li class="tips">'+champFetch.allytips[1]+'</li>' : ""}
+                                    ${champFetch.allytips[2] ? '<li class="tips">'+champFetch.allytips[2]+'</li>' : ""}
+                                    ${champFetch.allytips[3] ? '<li class="tips">'+champFetch.allytips[3]+'</li>' : ""}
+                                </ul>
+                                </div>
                             </li>
                             <li>
-                                <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-                                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                                <div class="collapsible-header"><img id="enemy-tips" src="./Img/tips.png"><span class="collapsible-text">ENEMY TIPS</span></div>
+                                <div class="collapsible-body">
+                                <ul>
+                                    ${champFetch.enemytips[0] ? '<li class="tips">'+champFetch.enemytips[0]+'</li>' : ""}
+                                    ${champFetch.enemytips[1] ? '<li class="tips">'+champFetch.enemytips[1]+'</li>' : ""}
+                                    ${champFetch.enemytips[2] ? '<li class="tips">'+champFetch.enemytips[2]+'</li>' : ""}
+                                    ${champFetch.enemytips[3] ? '<li class="tips">'+champFetch.enemytips[3]+'</li>' : ""}
+                                    
+                                </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><img id="lore" src="./Img/lore-icon.png"><span class="collapsible-text">LORE</span></div>
+                                <div class="collapsible-body">
+                                ${champFetch.lore}
+                                </div>
                             </li>
                         </ul>
                    
                     </div>
-                    <div class="col s12">
+                    <div id="skins-container" class="col s12">
+                    <p class="center">Skin:</p>
+                        <p class="center" id="skin-name">${champFetch.name}</p>
                         <div class ="carousel">
                         <div id="champSkins">
                             <a class="carousel-item" href="#one!"><img src="https://lorempixel.com/250/250/nature/1"></a>
                         </div>
                         </div>
-                        <p class="center" id="skin-name">Holi</p>
+                        
                     </div>
-                    <div class="col s12 m6">
+                    <div class="col s12">
                         <table class="centered">
                             <thead>
                                 <tr>
@@ -303,23 +326,26 @@ function champIndividualDiv(data, img) {
                         document.getElementById("champSkins").innerHTML = "";
                         data.skins.forEach(skin => {
                             document.getElementById("champSkins").innerHTML += `
-                            <a class="carousel-item"><img class="skin-img materialboxed responsive-img" src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${data.id}_${skin.num}.jpg"></a>
+                            <a class="carousel-item skin-name"><img class="skin-img materialboxed responsive-img" src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${data.id}_${skin.num}.jpg"></a>
                             
                             `
                         })
+                        let skinsAvailable = document.getElementsByClassName("skin-name");
+                        for (let i = 0; i<skinsAvailable.length; i++) {
+                            skinsAvailable[i].addEventListener("click", ()=> {
+                                document.getElementById("skin-name").innerHTML = data.skins[i].name === "default" ? data.name : data.skins[i].name;
+                            })
+                        }
                     }
                     function tagLoad(data) {
                         data[i].tags.forEach(tag => {
-                            console.log(tag)
                             document.getElementById("roles").innerHTML += `<div class="rol center-align valing-wrapper">
-                           <img class="rol-img responsive-img" src="https://universe.leagueoflegends.com/images/role_icon_${tag.toLowerCase()}.png">${tag}</div>
+                           <img class="rol-img responsive-img" src="./Img/${tag.toLowerCase()}-icon.png"></div>
                             `
                         })
                     }
+                   
                     tagLoad(data);
-                    // <div class="caption center-align">
-                    //     <h3>This is our big Tagline!</h3>
-                    // </div>
                     createCarousel(champFetch);
                     //inicializa select de esta pagina
                     window.M.AutoInit();

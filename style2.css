@@ -5,7 +5,7 @@
 
 @font-face {
     font-family: "Beaufort";
-    src: url("fonts/Beaudort-Bold.woff") format('woff');
+    src: url("fonts/Beaufort-Bold.woff") format('woff');
     font-weight: bold;
 }
 
@@ -462,8 +462,48 @@ table.skills-table {
 .rol-img {
     max-height: 48px;
     max-width: 48px;
+    margin-right: 10px;
 }
 
 .rol {
     display: inline-block;
+}
+
+#abilities, #ally-tips, #enemy-tips, #lore {
+    max-width: 25px;
+    max-height: 25px;
+}
+
+.collapsible {
+    border-top: 1px solid #f1e6d0;
+    border-left: 1px solid #f1e6d0;
+    border-right: 1px solid #f1e6d0;
+}
+
+.collapsible-text {
+    margin-left: 20px;
+}
+
+.materialboxed:hover:not(.active) {
+    opacity: 1;
+}
+
+.tips {
+    list-style-type: circle !important;
+    margin-bottom: 1%;
+    margin-left: 2%;
+}
+
+#skins-container {
+    /* border: 1px solid #fff8ea; */
+    font-size: 3rem;
+}
+
+#skin-name {
+    margin: 0;
+}
+
+p.center {
+    margin: 0;
+    margin-top: 2%;
 }
