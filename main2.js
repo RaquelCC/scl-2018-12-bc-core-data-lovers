@@ -125,7 +125,7 @@ function champIndividualDiv(data, img) {
         img[i].addEventListener("click", () => {
             let champFetch;
             //fetch api...
-            fetch("https://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/"+data[i].id+".json")
+            fetch("https://cors-anywhere.herokuapp.com/http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/"+data[i].id+".json")
                 .then(dataFetch => dataFetch.json())
                 .then(dataFetch => {
                     champFetch = dataFetch["data"][data[i].id];
